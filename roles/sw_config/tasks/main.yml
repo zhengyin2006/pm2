@@ -1,0 +1,10 @@
+---
+
+- name: Push config to switch ... please wait
+  eos_config:
+    src: "{{ pm.config_dir }}/{{inventory_hostname}}.cfg"
+    host: "{{ansible_host}}"
+    username: "vagrant"
+    password: "vagrant"
+    transport: cli
+    authorize: yes

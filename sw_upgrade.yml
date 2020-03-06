@@ -1,0 +1,9 @@
+---
+
+- name: Reconfigure switches
+  hosts: "{{ device }}"
+  connection: local
+  gather_facts: no
+
+  roles:
+    - sw_upgrade

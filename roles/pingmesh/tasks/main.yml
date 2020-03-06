@@ -1,0 +1,28 @@
+---
+- name: Pause a few before moving forward
+  pause:
+    seconds: "{{ pm.PAUSE_SECONDS }}"
+
+- name:  " PINGMESH HEALTH TEST - INVOKE NETMON API "
+  uri:
+    #url: "{{ REST_URL_BASE }}{{ REST_URL_FAILURE }}"
+    url: "{{ pm.COLLAB_SERVICE_URL_PATH_PREFIX }}{{ pm.COLLAB_SERVICE_URL_PATH_SUFFIX }}"
+    body_format: json
+    method: GET
+    # body: '{ "start" : "{{ (ansible_date_time.epoch|int) - pm.PLAYBOOK_LOOKBACK_WINDOW_SECONDS }}", "end" : "{{ ansible_date_time.epoch }}" }'
+
+  register: result
+  until: result.json.results[0].liveness_score|int == 100
+  retries: 25
+  delay: 15
+  ignore_errors: yes
+  failed_when: result.json.results[0].liveness_score|int != 100
+
+- name: "Failed"
+  fail:
+    msg: "Health score is : {{ result.json.results[0].liveness_score }}"
+  when: result.json.results[0].liveness_score|int != 100
+
+- name: "succeeded"
+  debug:
+    msg: "Health score is : {{ result.json.results[0].liveness_score }}"

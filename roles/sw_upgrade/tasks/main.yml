@@ -1,0 +1,25 @@
+---
+
+- name: Reloading EOS
+  eos_command:
+    host: "{{ansible_host}}"
+    username: "vagrant"
+    password: "vagrant"
+    transport: cli
+    authorize: yes
+    commands:
+      - 'reload now'
+
+- name: Pause a few
+  pause:
+    seconds: 30
+
+
+- name: Host Reachability testing
+  wait_for:
+    host: "{{ansible_host}}"
+    port: 22
+    state: started         # Port should be open
+    delay: 0               # No wait before first check (sec)
+    timeout: 300             # Stop checking after timeout (sec)
+  ignore_errors: no

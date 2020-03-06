@@ -1,0 +1,8 @@
+---
+pm:
+  config_dir: /home/dca/pingmesh/configs
+  COLLAB_SERVICE_URL_PATH_PREFIX: "http://10.251.83.130:8000"
+  # COLLAB_SERVICE_URL_PATH_SUFFIX: "/collab/query"
+  COLLAB_SERVICE_URL_PATH_SUFFIX: "/collab/core/liveness"
+  PAUSE_SECONDS: 100
+  PLAYBOOK_LOOKBACK_WINDOW_SECONDS: 0

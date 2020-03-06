@@ -1,0 +1,13 @@
+---
+- name: Pause a few before moving forward 
+  pause:
+    seconds: 3
+
+- name:  PingMesh Reachability Query
+  shell: exit 1
+  register: task_result
+  until: task_result.rc == 0
+  retries: 3
+  delay: 2
+  # # ignore_errors: yes
+  failed_when: task_result.rc != 0

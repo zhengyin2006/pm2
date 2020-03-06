@@ -1,0 +1,9 @@
+---
+
+- name: PingMesh
+  hosts: localhost
+  connection: local
+  gather_facts: True
+
+  roles:
+    - pingmesh_pre
