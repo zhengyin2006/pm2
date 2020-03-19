@@ -7,4 +7,4 @@ cd pm
 # ansible-playbook --version
 # pwd
 # ls -lR
-ssh 10.60.92.22
+ansible-playbook -i inventory/pingmesh.ini pingmesh_pre.yml
